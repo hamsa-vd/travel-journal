@@ -79,6 +79,8 @@ class _SliderState extends State<_Slider> {
   int _currentShowingIndex = 1;
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
     return CarouselSlider(
       options: CarouselOptions(
           initialPage: 1,
@@ -90,71 +92,82 @@ class _SliderState extends State<_Slider> {
           },
           enlargeCenterPage: true,
           viewportFraction: 0.75,
+          height: height > 800
+              ? height * 0.6
+              : height > 600
+                  ? height * 0.5
+                  : height * 0.4,
           autoPlay: false,
-          height: 500,
           reverse: false),
       items: Store.blogs
           .map((el) => GestureDetector(
-                child: Container(
-                    margin: EdgeInsets.symmetric(vertical: 10.0),
-                    decoration: BoxDecoration(
-                        boxShadow: el.imgIdx == _currentShowingIndex
-                            ? [
-                                BoxShadow(
-                                    color: Colors.black38,
-                                    blurRadius: 10.0,
-                                    offset: Offset(2, 2))
-                              ]
-                            : null,
-                        borderRadius: BorderRadius.circular(20.0),
-                        image: DecorationImage(
-                            image: el.image,
-                            fit: BoxFit.cover,
-                            colorFilter: ColorFilter.mode(
-                                Colors.black.withOpacity(0.4),
-                                BlendMode.darken))),
-                    child: el.imgIdx == _currentShowingIndex
-                        ? FractionallySizedBox(
-                            widthFactor: 1,
-                            child: Padding(
-                              // padding: const EdgeInsets.symmetric(
-                              //     vertical: 30.0, horizontal: 10.0),
-                              padding: const EdgeInsets.fromLTRB(
-                                  10.0, 15.0, 10.0, 30.0),
-                              child: Stack(children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.favorite,
-                                      color: Colors.redAccent,
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      el.title,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 40,
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                    Text(
-                                      el.date,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.normal),
-                                    )
-                                  ],
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                ),
-                              ]),
-                            ),
-                          )
-                        : null),
+                child: Hero(
+                  tag: el.title,
+                  child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 10.0),
+                      decoration: BoxDecoration(
+                          boxShadow: el.imgIdx == _currentShowingIndex
+                              ? [
+                                  BoxShadow(
+                                      color: Colors.black38,
+                                      blurRadius: 10.0,
+                                      offset: Offset(2, 2))
+                                ]
+                              : null,
+                          borderRadius: BorderRadius.circular(20.0),
+                          image: DecorationImage(
+                              image: el.image,
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.4),
+                                  BlendMode.darken))),
+                      child: el.imgIdx == _currentShowingIndex
+                          ? FractionallySizedBox(
+                              widthFactor: 1,
+                              child: Padding(
+                                // padding: const EdgeInsets.symmetric(
+                                //     vertical: 30.0, horizontal: 10.0),
+                                padding: const EdgeInsets.fromLTRB(
+                                    10.0, 15.0, 10.0, 30.0),
+                                child: Stack(children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Colors.redAccent,
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        el.title,
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: width < 400 ? 25 : 40,
+                                            fontWeight: FontWeight.w700),
+                                      ),
+                                      height > 600
+                                          ? Text(
+                                              el.date,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                  fontWeight:
+                                                      FontWeight.normal),
+                                            )
+                                          : SizedBox()
+                                    ],
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                  ),
+                                ]),
+                              ),
+                            )
+                          : null),
+                ),
                 onTap: () {
                   Navigator.pushNamed(context, "/blog", arguments: el);
                 },
@@ -172,7 +185,9 @@ class _BottomBar extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 45.0),
-        padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 10.0),
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width < 400 ? 15.0 : 40.0,
+            vertical: 10.0),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15.0),
@@ -200,14 +215,6 @@ class _WrapperState extends State<_Wrapper> {
   @override
   Widget build(BuildContext context) {
     return Stack(fit: StackFit.expand, children: [
-      _BottomBar(),
-      Positioned(
-          bottom: 30.0,
-          width: MediaQuery.of(context).size.width,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [SvgPicture.asset("assets/icons/add.svg")],
-          )),
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,13 +231,21 @@ class _WrapperState extends State<_Wrapper> {
               style: TextStyle(
                   color: MyColors.primary,
                   height: 1,
-                  fontSize: 50,
+                  fontSize: MediaQuery.of(context).size.width < 300 ? 30 : 50,
                   fontWeight: FontWeight.bold),
             ),
           ),
           _Slider()
         ],
       ),
+      _BottomBar(),
+      Positioned(
+          bottom: 30.0,
+          width: MediaQuery.of(context).size.width,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [SvgPicture.asset("assets/icons/add.svg")],
+          )),
     ]);
   }
 }

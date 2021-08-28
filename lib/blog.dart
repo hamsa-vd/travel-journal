@@ -10,7 +10,7 @@ class BlogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
+    final double height = MediaQuery.of(context).size.height;
     return Container(
       padding: EdgeInsets.all(10.0),
       color: Colors.white,
@@ -45,38 +45,43 @@ class BlogPage extends StatelessWidget {
               //       Colors.black54
               //     ], begin: Alignment.topCenter, end: Alignment.bottomCenter)
               //         .createShader(bounds),
-              Container(
-                height: size.height * 0.6,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    image: DecorationImage(
-                        image: blog.image,
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.4), BlendMode.darken))),
-                child: FractionallySizedBox(
-                  widthFactor: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 30.0),
-                    child: Column(
-                      children: [
-                        Text(
-                          blog.title,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 40,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        Text(
-                          blog.date,
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.normal),
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              Hero(
+                tag: blog.title,
+                child: Container(
+                  height: height * 0.6,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      image: DecorationImage(
+                          image: blog.image,
+                          fit: BoxFit.cover,
+                          colorFilter: ColorFilter.mode(
+                              Colors.black.withOpacity(0.4),
+                              BlendMode.darken))),
+                  child: FractionallySizedBox(
+                    widthFactor: 1,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 30.0),
+                      child: Column(
+                        children: [
+                          Text(
+                            blog.title,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.w700),
+                          ),
+                          Text(
+                            blog.date,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.normal),
+                          )
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                      ),
                     ),
                   ),
                 ),
@@ -112,7 +117,7 @@ class BlogPage extends StatelessWidget {
                     ),
                     Text(
                       blog.description,
-                      maxLines: 4,
+                      maxLines: height < 675 ? 2 : 4,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
                           color: MyColors.secondary,
@@ -124,8 +129,7 @@ class BlogPage extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 20.0, vertical: 30.0),
+                padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 30.0),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: ElevatedButton(
