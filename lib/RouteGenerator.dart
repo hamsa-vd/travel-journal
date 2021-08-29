@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:travel_journal/blog.dart';
+import 'package:travel_journal/journal.dart';
 import 'package:travel_journal/constants.dart';
 import 'package:travel_journal/home.dart';
 
@@ -9,9 +9,9 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => HomePage());
-      case '/blog':
-        if (args is Blog)
-          return MaterialPageRoute(builder: (_) => BlogPage(blog: args));
+      case '/journal':
+        if (args is Journal)
+          return MaterialPageRoute(builder: (_) => JournalPage(journal: args));
         else
           return MaterialPageRoute(builder: (_) => _ErrorPage());
       default:

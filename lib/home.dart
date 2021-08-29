@@ -99,7 +99,7 @@ class _SliderState extends State<_Slider> {
                   : height * 0.4,
           autoPlay: false,
           reverse: false),
-      items: Store.blogs
+      items: Store.journals
           .map((el) => GestureDetector(
                 child: Container(
                     margin: EdgeInsets.symmetric(vertical: 10.0),
@@ -164,7 +164,7 @@ class _SliderState extends State<_Slider> {
                           )
                         : null),
                 onTap: () {
-                  Navigator.pushNamed(context, "/blog", arguments: el);
+                  Navigator.pushNamed(context, "/journal", arguments: el);
                 },
               ))
           .toList(),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:travel_journal/constants.dart';
 
-class BlogPage extends StatelessWidget {
-  final Blog blog;
-  BlogPage({
+class JournalPage extends StatelessWidget {
+  final Journal journal;
+  JournalPage({
     Key? key,
-    required this.blog,
+    required this.journal,
   }) : super(key: key);
 
   @override
@@ -50,7 +50,7 @@ class BlogPage extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
-                        image: blog.image,
+                        image: journal.image,
                         fit: BoxFit.cover,
                         colorFilter: ColorFilter.mode(
                             Colors.black.withOpacity(0.4), BlendMode.darken))),
@@ -61,14 +61,14 @@ class BlogPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          blog.title,
+                          journal.title,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40,
                               fontWeight: FontWeight.w700),
                         ),
                         Text(
-                          blog.date,
+                          journal.date,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -111,7 +111,7 @@ class BlogPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      blog.description,
+                      journal.description,
                       maxLines: height < 675 ? 2 : 4,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

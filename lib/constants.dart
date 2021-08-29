@@ -7,30 +7,31 @@ class MyColors {
   const MyColors();
 }
 
-class Blog {
+class Journal {
   final String description;
   final ImageProvider<Object> image;
   final String title;
   final String date;
   final int imgIdx;
-  const Blog(this.image, this.description, this.title, this.date, this.imgIdx);
+  const Journal(
+      this.image, this.description, this.title, this.date, this.imgIdx);
 }
 
 class Store {
-  static final List<Blog> blogs = [
-    Blog(
+  static final List<Journal> journals = [
+    Journal(
         AssetImage('assets/images/tokyo bg card back 1.png'),
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique totam nam fugiat facere cumque voluptates illum alias cum. Exercitationem, placeat?",
         "Tokyo Temple",
         "March 30, 2020",
         0),
-    Blog(
+    Journal(
         AssetImage("assets/images/tokyo bg.jpeg"),
         "Tokyo comes to life at night. The best places to experience nightlife in Tokyo are Shinjuku, Shibuya, Ginza, Roppongi and Tokyo Tower. In Tokyo we also have",
         "Trip to Tokyo",
         "March 21, 2019",
         1),
-    Blog(
+    Journal(
         AssetImage("assets/images/tokyo bg card back 2.png"),
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique totam nam fugiat facere cumque voluptates illum alias cum. Exercitationem, placeat?",
         "Tokyo Lakes",
