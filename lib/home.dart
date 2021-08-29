@@ -77,10 +77,24 @@ class _Slider extends StatefulWidget {
 
 class _SliderState extends State<_Slider> {
   int _currentShowingIndex = 1;
+
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final double width = MediaQuery.of(context).size.width;
+    double getHeight() {
+      if (height > 800)
+        return height * 0.6;
+      else if (height > 700)
+        return height * 0.55;
+      else if (height > 600)
+        return height * 0.5;
+      else if (height > 550)
+        return height * 0.45;
+      else if (height > 450) return height * 0.4;
+      return height * 0.3;
+    }
+
     return CarouselSlider(
       options: CarouselOptions(
           initialPage: 1,
@@ -92,11 +106,7 @@ class _SliderState extends State<_Slider> {
           },
           enlargeCenterPage: true,
           viewportFraction: 0.75,
-          height: height > 800
-              ? height * 0.6
-              : height > 600
-                  ? height * 0.5
-                  : height * 0.4,
+          height: getHeight(),
           autoPlay: false,
           reverse: false),
       items: Store.journals
@@ -139,13 +149,15 @@ class _SliderState extends State<_Slider> {
                                 ),
                                 Column(
                                   children: [
-                                    Text(
-                                      el.title,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: width < 400 ? 25 : 40,
-                                          fontWeight: FontWeight.w700),
-                                    ),
+                                    height > 430
+                                        ? Text(
+                                            el.title,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: width < 400 ? 25 : 40,
+                                                fontWeight: FontWeight.w700),
+                                          )
+                                        : SizedBox(),
                                     height > 600
                                         ? Text(
                                             el.date,
