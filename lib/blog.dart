@@ -45,43 +45,38 @@ class BlogPage extends StatelessWidget {
               //       Colors.black54
               //     ], begin: Alignment.topCenter, end: Alignment.bottomCenter)
               //         .createShader(bounds),
-              Hero(
-                tag: blog.title,
-                child: Container(
-                  height: height * 0.6,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          image: blog.image,
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.4),
-                              BlendMode.darken))),
-                  child: FractionallySizedBox(
-                    widthFactor: 1,
-                    child: Padding(
-                      padding:
-                          const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 30.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            blog.title,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontWeight: FontWeight.w700),
-                          ),
-                          Text(
-                            blog.date,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.normal),
-                          )
-                        ],
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                      ),
+              Container(
+                height: height * 0.6,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                        image: blog.image,
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.4), BlendMode.darken))),
+                child: FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 30.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          blog.title,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          blog.date,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal),
+                        )
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                     ),
                   ),
                 ),

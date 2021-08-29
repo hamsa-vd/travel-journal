@@ -101,73 +101,68 @@ class _SliderState extends State<_Slider> {
           reverse: false),
       items: Store.blogs
           .map((el) => GestureDetector(
-                child: Hero(
-                  tag: el.title,
-                  child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 10.0),
-                      decoration: BoxDecoration(
-                          boxShadow: el.imgIdx == _currentShowingIndex
-                              ? [
-                                  BoxShadow(
-                                      color: Colors.black38,
-                                      blurRadius: 10.0,
-                                      offset: Offset(2, 2))
-                                ]
-                              : null,
-                          borderRadius: BorderRadius.circular(20.0),
-                          image: DecorationImage(
-                              image: el.image,
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.4),
-                                  BlendMode.darken))),
-                      child: el.imgIdx == _currentShowingIndex
-                          ? FractionallySizedBox(
-                              widthFactor: 1,
-                              child: Padding(
-                                // padding: const EdgeInsets.symmetric(
-                                //     vertical: 30.0, horizontal: 10.0),
-                                padding: const EdgeInsets.fromLTRB(
-                                    10.0, 15.0, 10.0, 30.0),
-                                child: Stack(children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Icon(
-                                        Icons.favorite,
-                                        color: Colors.redAccent,
-                                      )
-                                    ],
-                                  ),
-                                  Column(
-                                    children: [
-                                      Text(
-                                        el.title,
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: width < 400 ? 25 : 40,
-                                            fontWeight: FontWeight.w700),
-                                      ),
-                                      height > 600
-                                          ? Text(
-                                              el.date,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                  fontWeight:
-                                                      FontWeight.normal),
-                                            )
-                                          : SizedBox()
-                                    ],
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                  ),
-                                ]),
-                              ),
-                            )
-                          : null),
-                ),
+                child: Container(
+                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    decoration: BoxDecoration(
+                        boxShadow: el.imgIdx == _currentShowingIndex
+                            ? [
+                                BoxShadow(
+                                    color: Colors.black38,
+                                    blurRadius: 10.0,
+                                    offset: Offset(2, 2))
+                              ]
+                            : null,
+                        borderRadius: BorderRadius.circular(20.0),
+                        image: DecorationImage(
+                            image: el.image,
+                            fit: BoxFit.cover,
+                            colorFilter: ColorFilter.mode(
+                                Colors.black.withOpacity(0.4),
+                                BlendMode.darken))),
+                    child: el.imgIdx == _currentShowingIndex
+                        ? FractionallySizedBox(
+                            widthFactor: 1,
+                            child: Padding(
+                              // padding: const EdgeInsets.symmetric(
+                              //     vertical: 30.0, horizontal: 10.0),
+                              padding: const EdgeInsets.fromLTRB(
+                                  10.0, 15.0, 10.0, 30.0),
+                              child: Stack(children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    Icon(
+                                      Icons.favorite,
+                                      color: Colors.redAccent,
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      el.title,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: width < 400 ? 25 : 40,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    height > 600
+                                        ? Text(
+                                            el.date,
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.normal),
+                                          )
+                                        : SizedBox()
+                                  ],
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                ),
+                              ]),
+                            ),
+                          )
+                        : null),
                 onTap: () {
                   Navigator.pushNamed(context, "/blog", arguments: el);
                 },
